@@ -20,6 +20,19 @@ defmodule Geometry do
   end
 end
 
+a = {4, 5, 6}
+a = {a, a}
+b = {2, 3}
+
+b
+|> elem(1)
+|> IO.puts()
+
+cell = {:cell, 5, 10}
+
+cell2 = %{:row => 5, :column => 10}
+%{:row => row} = %{:row => 5, :column => 10}
+
 # Use this function by running
 # iex geometry.ex
 # Geometry.Rectangle.rectangle_area(6, 7)
@@ -28,3 +41,5 @@ end
 
 # if a function has no parameters, you can omit the parentheses
 # use "mix format geometry.ex" to format your code
+# /2 after a function name indicates that a function is going to
+# <> is the concatenation operator
