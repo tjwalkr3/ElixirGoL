@@ -1,6 +1,6 @@
 defmodule GameOfLife do
   def start(initial_live_cells) do
-    Stream.iterate(initial_live_cells, &next_generation/1) # Create a stream to get the next generation lazily
+    Stream.iterate(initial_live_cells, &next_generation/1) # Create a stream to always get the next generation lazily
   end
 
   def create_glider do
@@ -11,12 +11,8 @@ defmodule GameOfLife do
     live_cells
     |> Enum.flat_map(&neighbors/1)  # gets all neighbors for all cells, including duplicates
     |> Enum.frequencies()           # the frequency is the number of live neighbors a cell has
-    |> Enum.filter(fn {cell, count} -> live?(cell, count, live_cells) end) # apply the game of life rules
+    |> Enum.filter(fn {cell, count} -> (count == 3) or (count == 2 and cell in live_cells) end) # apply the game of life rules
     |> Enum.map(&elem(&1, 0))       # extract the coordinates themselves (without the mapped count)
-  end
-
-  def live?(cell, count, live_cells) do
-    (count == 3) or (count == 2 and cell in live_cells)
   end
 
   def neighbors({x, y}) do
@@ -33,6 +29,5 @@ end
 
 GameOfLife.run_game(100)
 
-# Get the coordinates of live cells for each generation
 # To run the game, type:
 # iex game_of_life.ex
