@@ -16,7 +16,7 @@ defmodule GameOfLife do
   end
 
   def neighbors({x, y}) do
-    for dx <- -1..1, dy <- -1..1, {dx, dy} != {0, 0}, do: {x + dx, y + dy} # iterate through offsets, excluding (0,0)
+    for dx <- -1..1, dy <- -1..1, {dx, dy} != {0, 0}, do: {x + dx, y + dy} # return all neighboring coords
   end
 
   def run_game(iterations) do
